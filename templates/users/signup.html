@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<form method="post" id='signup'  novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+      <table border=0>
+        <tr>
+      <td style='width:100px;color:black'>{{ field.label_tag }}</td>
+      <td>{{ field }}</td>
+        </tr>
+        {% for error in field.errors %}
+          <p> style="color: red">{{ error }}</p>
+        {% endfor %}
+
+    {% endfor %}
+  <tr><td><button type="submit">Sign up</button></td></tr>
+
+  </table >
+  </form>
+{% endblock %}
+{% block javascript %}
+
+{% endblock %}

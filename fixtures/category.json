@@ -1,0 +1,29 @@
+[
+{
+    "model": "news_feed.category",
+    "pk": 1,
+    "fields": {
+        "created_on": "2022-02-09T06:54:32.997Z",
+        "updated_on": "2022-02-09T06:54:32.997Z",
+        "name": "Cricket"
+    }
+},
+{
+    "model": "news_feed.category",
+    "pk": 2,
+    "fields": {
+        "created_on": "2022-02-09T06:54:38.644Z",
+        "updated_on": "2022-02-09T06:54:38.644Z",
+        "name": "Politics"
+    }
+},
+{
+    "model": "news_feed.category",
+    "pk": 3,
+    "fields": {
+        "created_on": "2022-02-09T06:55:19.512Z",
+        "updated_on": "2022-02-09T06:55:19.512Z",
+        "name": "Football"
+    }
+}
+]

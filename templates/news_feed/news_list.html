@@ -1,0 +1,54 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block container %}
+{% csrf_token %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 offset-lg-2">
+            <div class="infinite-container">
+                {% if not user.is_authenticated %}
+                    <h4 style="color:red">Please Login in order to upvote and downvote the article</h4>
+                {% endif %}
+                {% for news in news_list %}
+                <div class="infinite-item">
+                    <div class="col-sm-12">
+
+                        <h3>
+                            <a href="{{news.url}}" target="_blank" style="color: blue;">{{news.title}}</a>
+                        </h3>
+                        <div class="col-sm-9">
+                            <p>{{news.content}}</p>
+                            <a href="{{news.url}}" target="_blank">Read more</a>
+                        </div>
+                        <div class="col-sm-3">
+                            {% if user.is_authenticated %}
+                                <button class="btn btn-primary" onclick="changeVoteCount(1, {{news.id}}, '{% url 'news:change-vote-count' %}')" {% if not user.is_authenticated %} diabled {% endif %}>Vote up</button>
+                                <button class="btn btn-warning" style="color:black"
+                                    onclick="changeVoteCount(0, {{news.id}}, '{% url 'news:change-vote-count' %}')">Vote down</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="col-sm-6" style="margin-top: 20px;margin-bottom: 20px;">
+                    {% if page_obj.has_previous %}
+                    <a class="infinite-more-link btn btn-primary"
+                        href="?page={{ page_obj.previous_page_number }}">Previous page</a>
+                    {% endif %}
+
+                    {% if page_obj.has_next %}
+                    <a class="infinite-more-link btn btn-primary" href="?page={{ page_obj.next_page_number }}">More</a>
+                    {% endif %}
+                </div>
+            </>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'js/changeVote.js' %}"></script>
+{% endblock %}
