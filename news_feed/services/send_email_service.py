@@ -9,6 +9,9 @@ class SendEmailService:
 
     @classmethod
     def send_email(cls, receiver_email, username, category):
+        """
+        sending email to the user based on the relevant category/ preference of the user
+        """
         domain = Site.objects.get_current().domain
         newsfeed_url = f"{domain}{reverse('news:news-list')}"
         context = {'category': category,

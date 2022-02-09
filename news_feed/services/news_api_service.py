@@ -13,6 +13,9 @@ logger = logging.getLogger("news_authenticity")
 class NewsApiService(BaseApiService):
 
     def __init__(self):
+        """
+        Initializing the paramas for the news api
+        """
         BaseApiService.__init__(self)
         self.url = NewsApiConstants.NEWS_API_ORG_URL
         self.today = datetime.today().date().strftime("%Y-%m-%d")
@@ -23,6 +26,9 @@ class NewsApiService(BaseApiService):
         }
 
     def fetch_api_data(self):
+        """
+        calling the news api and then extracting the data from the response of the API, also generating the task to send email notification.
+        """
         try:
             for category in self.categories:
                 category_obj = Category.objects.filter(name=category).first()

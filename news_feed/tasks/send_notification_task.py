@@ -14,6 +14,9 @@ class SendNotificationEmail(Task):
     name = "send_notification_email"
 
     def run(self, category):
+        """
+        Celery task to send the email to the user regarding the news
+        """
         try:
             user_profiles = User.objects.filter(preferences__isnull=False)
             users = user_profiles.filter(preferences__name=category)

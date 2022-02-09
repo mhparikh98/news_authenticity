@@ -13,10 +13,16 @@ logger = logging.getLogger("news_authenticity")
 class LoginView(View):
 
     def get(self, request):
+        """
+        Displaying the form for authentication through which user can login
+        """
         form = AuthenticationForm()
         return render(request, "users/login.html", context={"form": form})
 
     def post(self, request):
+        """
+        Authenticating user and allow him to login inside the system
+        """
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             username = form.data.get("username")
@@ -33,10 +39,16 @@ class LoginView(View):
 
 class SignUpView(View):
     def get(self, request):
+        """
+        Displaying the signup form so that news user can enter into the system
+        """
         form = SignUpForm()
         return render(request, 'users/signup.html', {'form': form})
 
     def post(self, request):
+        """
+        Getting new user data so that he can be registered into the system
+        """
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()

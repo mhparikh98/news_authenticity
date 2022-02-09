@@ -14,12 +14,19 @@ logger = logging.getLogger("news_authenticity")
 class HomePageView(View):
 
     def get(self, request):
+        """
+        Redirecting end user to news page
+        """
         return HttpResponseRedirect("/news")
 
 
 class NewsFeedListing(ListView):
 
     def get_queryset(self):
+        """
+        If a user is logged in then he is shown news based on the preferences but if he has not logged in than 
+        news belonging to all the categories are shown to him.
+        """
         user = self.request.user
         if user.is_authenticated:
             queryset = NewsData.objects.filter(category__in=user.preferences.values_list("id", flat=True))
@@ -35,9 +42,15 @@ class NewsFeedListing(ListView):
 
 
 class ChangeVoteCount(LoginRequiredMixin, View):
+    """
+    If a user is logged in then only user can change the vote
+    """
 
     def put(self, request):
         try:
+            """
+            A logged in user can either upvote or downvote the news
+            """
             data = json.loads(request.body)
             vote_type = str(data.get('voteType'))
             news_id = data.get('newsId')

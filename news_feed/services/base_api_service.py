@@ -6,6 +6,9 @@ logger = logging.getLogger("news_authenticity")
 
 
 class BaseApiService(ABC):
+    """
+    Generated the Base API class so that we can define the derived class in which we are calling the repected api.
+    """
 
     news_data = []
 
@@ -18,6 +21,9 @@ class BaseApiService(ABC):
         pass
 
     def save_data(self):
+        """
+        After fetching the data we are saving data to the database.
+        """
         try:
             for data in self.news_data:
                 news_list = list(data.values())[0]

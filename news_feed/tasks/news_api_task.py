@@ -21,6 +21,9 @@ class NewsApiTask(Task):
     name = "news_api_task"
 
     def run(self):
+        """
+        Fetching the news from the news api and then sending notification to the user over email regarding the news
+        """
         try:
             obj = NewsApiService()
             obj.fetch_api_data()
